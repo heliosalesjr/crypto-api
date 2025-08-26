@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import CoinCard from "./components/CoinCard";
 import LimitSelector from "./components/LimitSelector";
+import FilterInput from "./components/FilterInput";
 const API_URL = import.meta.env.VITE_API_URL
 
 function App() {
@@ -30,21 +31,31 @@ function App() {
 
  
 
-  
+  const filteredCoins = coins.filter( (coin => {
+    return (
+      coin.name.toLowerCase().includes(filter.toLowerCase())
+    ||
+    coin.symbol.toLowerCase().includes(filter.toLowerCase())
+    )
+  }))
 
   return (
     <div>
       <h1>Here are the Coins:</h1>
       {loading && <p>Loading...</p>}
       {error && <div className="error">{error}</div>}
-
-      <LimitSelector limit={limit} onLimitChange={setLimit}/>
+      <div className="top-controls">
+        <FilterInput filter={filter} onFilterChange={setFilter}/>
+        <LimitSelector limit={limit} onLimitChange={setLimit}/>
+        
+      </div>
       
+
       {!loading && !error && (
         <main className="grid">
-          {coins.map((coin) => (
+          {filteredCoins.length > 0 ? filteredCoins.map((coin) => (
             <CoinCard coin={coin} key={coin.id}/>
-          ))}
+          )) : <p>No coins match your search!</p>}
         </main>
       )}
     </div>
