@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react"
 import CoinCard from "./components/CoinCard";
+import LimitSelector from "./components/LimitSelector";
 const API_URL = import.meta.env.VITE_API_URL
 
 function App() {
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [limit, setLimit] = useState(5);
+  const [filter, setFilter] = useState('');
 
   useEffect ( ()=> {
     const fetchCoins = async () => {
       try {
-        const res = await fetch(API_URL);
+        const res = await fetch(`${API_URL}&order=market_cap_desc&per_page=${limit}&page=1&sparkline=false`);
         if (!res.ok ) throw new Error('failed!!!');
         const data = await res.json();
         console.log(data)
@@ -23,7 +26,7 @@ function App() {
     }
     fetchCoins();
     
-  },[])
+  },[limit])
 
  
 
@@ -35,6 +38,8 @@ function App() {
       {loading && <p>Loading...</p>}
       {error && <div className="error">{error}</div>}
 
+      <LimitSelector limit={limit} onLimitChange={setLimit}/>
+      
       {!loading && !error && (
         <main className="grid">
           {coins.map((coin) => (
