@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import CoinCard from "./components/CoinCard";
 const API_URL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false'
 
 function App() {
@@ -37,14 +38,7 @@ function App() {
       {!loading && !error && (
         <main className="grid">
           {coins.map((coin) => (
-            <div className="coin-card" key={coin.id}>
-              <div className="coin-header">
-                <img src={coin.image} alt={coin.name} className="coin-image" />
-                <div>
-                  <h2>{coin.name}</h2>
-                </div>
-              </div>
-            </div>
+            <CoinCard coin={coin} key={coin.id}/>
           ))}
         </main>
       )}
