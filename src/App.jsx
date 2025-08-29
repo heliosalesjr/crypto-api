@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
-import HomePage from './pages/home'
+import HomePage from './pages/Home'
 import { Routes, Route } from "react-router";
+import AboutPage from "./pages/about";
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -43,9 +44,15 @@ function App() {
         limit={limit}
         setLimit={setLimit}
         sortBy={sortBy}
+        setSortBy={setSortBy}
         loading={loading}
         error={error}
+        
         />} />
+
+        <Route path="/about" element={<AboutPage />} />
+
+        
     </Routes>
     
   )
