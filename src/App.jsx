@@ -3,6 +3,7 @@ import HomePage from './pages/Home'
 import { Routes, Route } from "react-router";
 import AboutPage from "./pages/about";
 import Navbar from "./components/Navbar";
+import NotFoundPage from "./pages/not-found";
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -54,7 +55,7 @@ function App() {
           />} />
 
           <Route path="/about" element={<AboutPage />} />
-
+          <Route path="*" element={<NotFoundPage />} />
           
       </Routes>
     </>
