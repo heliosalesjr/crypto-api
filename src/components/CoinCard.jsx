@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const CoinCard = ( {coin}) => {
   return (
-    
-        <div className="coin-card" >
+        <Link to={`/coin/${coin.id}`}>
+          <div className="coin-card" >
               <div className="coin-header">
                 <img src={coin.image} alt={coin.name} className="coin-image" />
                 <div>
@@ -18,7 +19,9 @@ const CoinCard = ( {coin}) => {
               <p >
                 Market Cap: {coin.market_cap.toLocaleString()}
               </p>
-            </div>
+          </div>
+        </Link>
+        
     
   )
 }

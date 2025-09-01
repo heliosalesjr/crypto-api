@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router";
 import AboutPage from "./pages/about";
 import Navbar from "./components/Navbar";
 import NotFoundPage from "./pages/not-found";
+import CoinsDetailsPage from "./pages/coin-details";
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -55,6 +56,7 @@ function App() {
           />} />
 
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/coin/:id" element={<CoinsDetailsPage/>}/>
           <Route path="*" element={<NotFoundPage />} />
           
       </Routes>
